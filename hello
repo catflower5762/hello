@@ -1,0 +1,10 @@
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+import glob
+from IPython.display import clear_output
+
+def show_img(img):
+image_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    plt.imshow(image_rgb)
+    plt.show()
