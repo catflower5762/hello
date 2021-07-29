@@ -5,6 +5,37 @@ import glob
 from IPython.display import clear_output
 
 def show_img(img):
-image_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+image_rgb = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)--> #
     plt.imshow(image_rgb)
     plt.show()
+
+def modify_color_temperature(img):
+imgB = img[:, :, 0] 
+imgG = img[:, :, 1]
+imgR = img[:, :, 2] 
+
+bAve = cv2.mean(imgB)[0] 
+    gAve = cv2.mean(imgG)[0] + 20
+    rAve = cv2.mean(imgR)[0] + 20
+    aveGray = (int)(bAve + gAve + rAve) / 3
+
+    bCoef = aveGray / bAve
+    gCoef = aveGray / gAve
+    rCoef = aveGray / rAve
+    imgB = np.floor((imgB * bCoef))  
+    imgG = np.floor((imgG * gCoef))
+    imgR = np.floor((imgR * rCoef))
+
+
+    imgb = imgB
+    imgb[imgb > 255] = 255
+    
+    imgg = imgG
+    imgg[imgg > 255] = 255
+    
+    imgr = imgR
+    imgr[imgr > 255] = 255
+        
+    cold_rgb = np.dstack((imgb, imgg, imgr)).astype(np.uint8)
+
+    調整色調、色溫(白平衡)-->冷色調 
