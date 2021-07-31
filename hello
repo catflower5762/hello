@@ -63,3 +63,18 @@ k = (r_avg + g_avg + b_avg) / 3
     b = cv2.addWeighted(src1=b, alpha=kb, src2=0, beta=0, gamma=0)
     balance_img = cv2.merge([b, g, r])
     return balance_img
+
+    -------------------------------------------------
+    將灰階IMG轉為BGR
+    import cv2
+    import numpy as np
+    img=np.random.randint(0,256,size=[2,4],dtype=np.uint8)
+    rst=cv2.cvtColor(img,cv2,COLOR_GRAY2BGR)
+    print("img=\n",img)
+    print("rst=\n",rst)
+
+  
+
+
+
+
